@@ -2,18 +2,18 @@
 
 import React from 'react';
 import { Container, Grid, Typography, Box,useTheme } from '@mui/material';
+import CoinDataCharts from './CoinDataCharts';
 
 const cardIcon = "./assets/Market/RippleIcon.png";
 const starIcon = "./assets/Market/starIcon.png";
-const Graph1 = "./assets/Market/LossGraph.png";
-const Graph2 = "./assets/Market/ProfitGraph.png";
 const starIconFill = "./assets/Market/starIconFill.png";
 
+
 const features = [
-  { icon: cardIcon,starIcon:starIcon,graphIcon:Graph1, title: "Ripple", subTitle: "RPE" },
-  { icon: cardIcon,starIcon:starIconFill,graphIcon:Graph2, title: "Ripple", subTitle: "RPE" },
-  { icon: cardIcon,starIcon:starIcon,graphIcon:Graph1, title: "Ripple", subTitle: "RPE" },
-  { icon: cardIcon,starIcon:starIconFill,graphIcon:Graph2, title: "Ripple", subTitle: "RPE" },
+  { icon: cardIcon,starIcon:starIcon, graph:true, title: "Ripple", subTitle: "RPE" },
+  { icon: cardIcon,starIcon:starIconFill, graph:false, title: "Ripple", subTitle: "RPE" },
+  { icon: cardIcon,starIcon:starIcon, graph:true, title: "Ripple", subTitle: "RPE" },
+  { icon: cardIcon,starIcon:starIconFill, graph:false, title: "Ripple", subTitle: "RPE" },
 ];
 
 const MarketDashboardCard: React.FC = () => {
@@ -40,7 +40,7 @@ const MarketDashboardCard: React.FC = () => {
            </Grid>
            <Grid className='flex justify-between items-center mt-8' sx={{height:"84px",padding:"12px 10px",background:theme.palette.mode==="dark" ? "#161A26":"#FAFBFF"}}>
            <Grid item>
-                <img src={feature.graphIcon} />
+            <CoinDataCharts isPositive={feature.graph} />
             </Grid>
             <Grid item className='flex items-center gap-3'>
                 <Grid>

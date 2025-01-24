@@ -2,10 +2,9 @@
 
 import React from 'react';
 import { Grid, Typography, useTheme, Divider } from '@mui/material';
-const QuillUp = "./assets/Market/quill_arrow-up.png"
-const QuillDown = "./assets/Market/quill_arrow-down.png"
-const LossGraph = "./assets/Market/LossGraph.png";
-const ProfitGraph = "./assets/Market/ProfitGraph.png";
+import CoinDataCharts from './CoinDataCharts';
+const QuillUp = "./assets/Market/quill_arrow-up.png";
+const QuillDown = "./assets/Market/quill_arrow-down.png";
 const starIcon = "./assets/Market/starIcon.png";
 const starIconFill = "./assets/Market/starIconFill.png";
 const Icon1 = "./assets/Market/btc.png";
@@ -28,9 +27,9 @@ const cryptoData = [
     marketcap: "$65382.80",
     change: "-12%",
     changeIcon: QuillDown,
-    graph: LossGraph,
+    graph: false,
     icon: Icon1,
-    favIcon:starIcon
+    favIcon: starIcon
   },
   {
     id: 2,
@@ -41,9 +40,9 @@ const cryptoData = [
     marketcap: "$3.94",
     change: "-12%",
     changeIcon: QuillDown,
-    graph: LossGraph,
+    graph: false,
     icon: Icon2,
-    favIcon:starIconFill
+    favIcon: starIconFill
   },
   {
     id: 3,
@@ -54,9 +53,9 @@ const cryptoData = [
     marketcap: "$462,676.75",
     change: "+12%",
     changeIcon: QuillUp,
-    graph: ProfitGraph,
+    graph: true,
     icon: Icon3,
-    favIcon:starIcon
+    favIcon: starIcon
   },
   {
     id: 4,
@@ -67,9 +66,9 @@ const cryptoData = [
     marketcap: "$462,676.75",
     change: "-12%",
     changeIcon: QuillDown,
-    graph: LossGraph,
+    graph: false,
     icon: Icon4,
-    favIcon:starIconFill
+    favIcon: starIconFill
   },
   {
     id: 5,
@@ -80,9 +79,9 @@ const cryptoData = [
     marketcap: "$65382.80",
     change: "-12%",
     changeIcon: QuillDown,
-    graph: LossGraph,
-    icon: Icon5, 
-    favIcon:starIconFill
+    graph: false,
+    icon: Icon5,
+    favIcon: starIconFill
   },
   {
     id: 6,
@@ -93,9 +92,9 @@ const cryptoData = [
     marketcap: "$3.94",
     change: "-12%",
     changeIcon: QuillDown,
-    graph: LossGraph,
+    graph: false,
     icon: Icon6,
-    favIcon:starIconFill
+    favIcon: starIconFill
   },
   {
     id: 7,
@@ -106,9 +105,9 @@ const cryptoData = [
     marketcap: "$462,676.75",
     change: "+12%",
     changeIcon: QuillUp,
-    graph: ProfitGraph,
-    icon: Icon7, 
-    favIcon:starIcon
+    graph: true,
+    icon: Icon7,
+    favIcon: starIcon
   },
   {
     id: 8,
@@ -119,9 +118,9 @@ const cryptoData = [
     marketcap: "$462,676.75",
     change: "-12%",
     changeIcon: QuillDown,
-    graph: LossGraph,
+    graph: false,
     icon: Icon8,
-    favIcon:starIconFill
+    favIcon: starIconFill
   },
   {
     id: 9,
@@ -132,9 +131,9 @@ const cryptoData = [
     marketcap: "$65382.80",
     change: "-12%",
     changeIcon: QuillDown,
-    graph: LossGraph,
+    graph: false,
     icon: Icon9,
-    favIcon:starIcon
+    favIcon: starIcon
   },
   {
     id: 10,
@@ -145,9 +144,9 @@ const cryptoData = [
     marketcap: "$3.94",
     change: "-12%",
     changeIcon: QuillDown,
-    graph: LossGraph,
+    graph: false,
     icon: Icon1,
-    favIcon:starIconFill
+    favIcon: starIconFill
   },
   {
     id: 11,
@@ -158,9 +157,9 @@ const cryptoData = [
     marketcap: "$462,676.75",
     change: "+12%",
     changeIcon: QuillUp,
-    graph: ProfitGraph,
+    graph: true,
     icon: Icon2,
-    favIcon:starIcon
+    favIcon: starIcon
   },
   {
     id: 12,
@@ -171,9 +170,9 @@ const cryptoData = [
     marketcap: "$462,676.75",
     change: "-12%",
     changeIcon: QuillDown,
-    graph: LossGraph,
-    icon: Icon3, 
-    favIcon:starIconFill
+    graph: false,
+    icon: Icon3,
+    favIcon: starIconFill
   },
 ];
 
@@ -183,15 +182,13 @@ const AllContentTab: React.FC = () => {
   const theme = useTheme();
 
   return (
-  
-
-        <Grid item spacing={4} py={4}>
-          <Grid item className="shadow rounded" style={{ background: theme.palette.mode === "dark" ? "transparent" : "#ffffff", border: theme.palette.mode === "dark" ? "1px solid #ffffff35" : "1px solid #ffffff23" }}>
-          {cryptoData.map((crypto, index) => (
-            <>
-            <div  key={index} className="flex px-6 py-8 justify-between items-center">
+    <Grid item spacing={4} py={4}>
+      <Grid item className="shadow rounded" style={{ background: theme.palette.mode === "dark" ? "transparent" : "#ffffff", border: theme.palette.mode === "dark" ? "1px solid #ffffff35" : "1px solid #ffffff23" }}>
+        {cryptoData.map((crypto, index) => (
+          <>
+            <div key={index} className="flex px-6 py-8 justify-between items-center">
               <div className='1 flex items-center gap-4'>
-                <img src={crypto.favIcon} alt="Star Icon" style={{cursor:"pointer"}} />
+                <img src={crypto.favIcon} alt="Star Icon" style={{ cursor: "pointer" }} />
                 <Typography className='text-base font-normal' sx={{ color: theme.palette.primary.light }}>{crypto.id}</Typography>
               </div>
               <div className='2 flex items-center gap-4'>
@@ -221,21 +218,17 @@ const AllContentTab: React.FC = () => {
                 </div>
               </div>
               <div className='7'>
-                <img src={crypto.graph} alt="Graph" />
+                <CoinDataCharts isPositive={crypto.graph} />
               </div>
             </div>
-           {index < cryptoData.length - 1 && <Divider />}     
-            </>
-          ))}
-          </Grid>
-          <button className=" text-white font-normal py-4 px-6 rounded mt-12 text-center flex m-auto" style={{background:"linear-gradient(90deg, #1DA1F2 0%, #009FFC 100%)"}}>
-            Load More
-          </button>
-
-        </Grid>
-    
-
-  
+            {index < cryptoData.length - 1 && <Divider />}
+          </>
+        ))}
+      </Grid>
+      <button className=" text-white font-normal py-4 px-6 rounded mt-12 text-center flex m-auto" style={{ background: "linear-gradient(90deg, #1DA1F2 0%, #009FFC 100%)" }}>
+        Load More
+      </button>
+    </Grid>
   );
 };
 
